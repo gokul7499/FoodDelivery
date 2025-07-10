@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext,useState } from "react";
 import Nav from "../components/Nav";
 import { categories } from "../components/Category";
 import Card from "../components/Card";
@@ -8,11 +8,12 @@ import { ImCross } from "react-icons/im";
 import { useSelector } from "react-redux";
 import Card2 from "../components/Card2";
 import { toast } from 'react-toastify';
-
+import Payment from "../components/Payment/Payment";
 function Home() {
   const { category, setCategory, input, showCart, setShowCart } =
     useContext(dataContext);
 
+    const [showPayment, setShowPayment] = useState(false);
   // Filter by category
   function filter(selectedCategory) {
     if (selectedCategory === "All") {
@@ -148,9 +149,13 @@ function Home() {
     </span>
   </div>
 
-  <button className="cursor-pointer w-full p-4 bg-green-400 rounded-lg font-semibold text-white hover:bg-green-500 transition-all duration-500">
-    Place Order
-  </button>
+ <button
+  onClick={() => setShowPayment(true)}
+  className="cursor-pointer w-full p-4 bg-green-400 rounded-lg font-semibold text-white hover:bg-green-500 transition-all duration-500"
+>
+  Place Order
+</button>
+{showPayment && <Payment setShowPayment={setShowPayment} />}
 </div>
 </>
         ) : (
